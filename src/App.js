@@ -6,18 +6,35 @@ import Error from './components/Error';
 
 class App extends Component {
 
-    render() {
-        return (<div className="container-fluid">
-            <center>
-                <h2>Hacker Hostel</h2>
-            </center>
-            <div className="container">
-                <Bookings></Bookings>
-                <Error></Error>
-                <Meals></Meals>
-            </div>
-        </div>);
+  constructor (props) {
+    super(props)
+    this.state = {
+      hackers: {}
     }
+
+    this.handleGetMeals = this.handleGetMeals.bind(this)
+  }
+
+  handleGetMeals(hackers) {
+    this.setState({
+      hackers: hackers
+    })
+  }
+
+  render() {
+    return (
+      <div className="container-fluid">
+	<center>
+	  <h2>Hacker Hostel</h2>
+	</center>
+	<div className="container">
+	  <Bookings handleGetMeals={this.handleGetMeals}/>
+	  <Error hackers={this.state.hackers}></Error>
+	  <Meals hackers={this.state.hackers}></Meals>
+	</div>
+      </div>
+    );
+  }
 }
 
 export default App;
