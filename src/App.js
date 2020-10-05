@@ -7,15 +7,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hackers: {},
+      data: {},
+      errors: [],
     };
 
     this.handleGetMeals = this.handleGetMeals.bind(this);
   }
 
-  handleGetMeals(hackers) {
+  handleGetMeals(data, errors) {
     this.setState({
-      hackers: hackers,
+      data: data,
+      errors: errors,
     });
   }
 
@@ -27,8 +29,8 @@ class App extends Component {
         </center>
         <div className="container">
           <Bookings handleGetMeals={this.handleGetMeals} />
-          <Error hackers={this.state.hackers} />
-          <Meals hackers={this.state.hackers} />
+          <Error errors={this.state.errors} />
+          <Meals data={this.state.data} />
         </div>
       </div>
     );
